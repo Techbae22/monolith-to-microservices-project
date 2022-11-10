@@ -17,5 +17,12 @@ jobs:
  
     steps:
     - uses: actions/checkout@v3
-    - run: echo "Hello World from Udacity"
-    - run: ls -l
+    - run: docker-compose -f docker-compose-build.yaml build --parallel
+    - run: docker tag reverseproxy andra13/reverseproxy:v1
+    - run: docker tag udagram-frontend:local andra13/udagram-frontend:v1
+    - run: docker tag udagram-api-feed andra13/udagram-api-feed:v1
+    - run: docker tag udagram-api-user andra13/udagram-api-user:v1
+    - run: docker push andra13/reverseproxy:v1
+    - run: docker push andra13/udagram-frontend:v1
+    - run: docker push andra13/udagram-api-feed:v1
+    - run: docker push andra13/udagram-api-user:v1
